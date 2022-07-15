@@ -85,7 +85,7 @@ const BeautyWebView = ({
 
   return (
     <Modal visible={visible} transparent={false} animationType={animationType}>
-      <SafeAreaView style={[styles.container, { backgroundColor: backgroundColor }]}>
+      <SafeAreaView style={[styles.container, { backgroundColor: backgroundColor }, { marginTop: 30 }]}>
         <Header
           backgroundColor={headerBackground}
           contentType={headerContent}
