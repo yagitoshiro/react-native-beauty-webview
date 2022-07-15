@@ -27,7 +27,8 @@ const BeautyWebView = ({
   menuIcon,
   onGoBack,
   onGoForward,
-  incognito
+  incognito,
+  injectedJavaScriptFromOuterSpace
 }) => {
   const [progressRef, setProgressRef] = useState(null);
   const [backgroundProgressRef, setBackgroundProgressRef] = useState(null);
@@ -79,6 +80,8 @@ const BeautyWebView = ({
       setCurrentUrl(url);
     }, 200);
   } 
+  
+  const injectedJavaScript = `window.ReactNativeWebView.postMessage(document.title);${injectedJavaScriptFromOuterSpace}`;
 
   return (
     <Modal visible={visible} transparent={false} animationType={animationType}>
@@ -115,7 +118,7 @@ const BeautyWebView = ({
             let loadingProgress = nativeEvent.progress;
             onProgress(loadingProgress);
           }}
-          injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
+          injectedJavaScript={injectedJavaScript}
           onMessage={event => setTitle(event.nativeEvent.data)}
           onLoadEnd={onLoadEnd}
           onLoadStart={onLoadStart}
